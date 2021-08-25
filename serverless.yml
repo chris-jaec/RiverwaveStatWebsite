@@ -1,0 +1,100 @@
+service: riverwavestat
+
+provider:
+  name: aws
+  runtime: python3.8
+  region: eu-central-1
+  stage: dev
+  environment:
+    DYNAMODB_TABLE_PREFIX: ${self:service}-${opt:stage, self:provider.stage}
+    STAGE: ${opt:stage, self:provider.stage}
+    REGION: ${opt:region, self:provider.region}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/*"
+
+plugins:
+  - serverless-python-requirements
+custom:
+  pythonRequirements:
+    pythonBin: python3
+    usePipenv: true
+    layer: true
+
+functions:
+
+  sync:
+    handler: src/sync.sync
+    events:
+      - schedule: rate(1 minute)
+    layers:
+      - Ref: PythonRequirementsLambdaLayer
+
+  get_latest:
+    handler: src/api.get_latest
+    timeout: 30
+    events:
+      - http:
+          path: /riverwaves/{riverwave}/latest
+          method: GET
+          cors: true
+          request:
+            parameters:
+              paths:
+                riverwave: true
+
+resources:
+  Resources:
+    RiverStatDynamoDbTableEisbach:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Delete
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: datetime
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: datetime
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:provider.environment.DYNAMODB_TABLE_PREFIX}-eisbach
+
+    RiverStatDynamoDbTableAlmkanal:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Delete
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: datetime
+            AttributeType: S
+        KeySchema:
+          - AttributeName: datetime
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:provider.environment.DYNAMODB_TABLE_PREFIX}-almkanal
+
+    RiverStatDynamoDbTableEbensee:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Delete
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: datetime
+            AttributeType: S
+        KeySchema:
+          - AttributeName: datetime
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:provider.environment.DYNAMODB_TABLE_PREFIX}-ebensee
