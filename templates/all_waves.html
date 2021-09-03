@@ -9,12 +9,12 @@
 
         <div id="single-wave-card-div" class="col-xxl-3 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="card-bg-cover"
-                 style="background-image: linear-gradient(to bottom,{{ wave['gradient_from'] }}, {{ wave['gradient_to'] }}), url(/static/img/{{ wave['image'] }})">
+                 style="background-image: linear-gradient(to bottom,{{ wave['gradient_from'] }}, {{ wave['gradient_to'] }}), url(/static/img/{{ wave['name'] }}.jpg)">
 
                 <div class="data-container">
 
                     <!-- HEADER RIVERWAVE NAME -->
-                    <h1>{{ wave['name'].capitalize() }}</h1>
+                    <h4>{{ wave['displayName'] }}</h4>
                     <hr></hr>
 
                     <!-- START WATER LEVEL -->
@@ -27,15 +27,33 @@
                         </h5>
                     </div>
 
-                    <div class="int" style="padding: 5px;">
-                        <button type="button" class="btn btn-outline-light">
-                            {% if wave['data']['water_level'] != 'None' %}
-                            {{ wave['data']['water_level'] }} cm
-                            {% else %}
-                            Nicht verfügbar
-                            {% endif %}
-                        </button>
+                    <div class="mt-1">
+                        <div class="card voutchers" style="background: {{ wave['text_bg'] }}">
+                            <div class="voutcher-divider">
+                                <div class="voutcher-left text-center">
+                                    <h5 class="voutcher-name">Aktueller Wert</h5>
+                                    <h5 class="voutcher-name">{{ wave['data']['water_level']['latest'][0]['datetime'] }}</h5>
+                                </div>
+                                <div class="voutcher-right text-center border-left">
+                                    <h4 class="discount-percent">{{ wave['data']['water_level']['latest'][0]['value'] }} cm</h4>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="mt-1">
+                        <div class="card voutchers" style="background: {{ wave['text_bg'] }}">
+                            <div class="voutcher-divider">
+                                <div class="voutcher-left text-center">
+                                    <span class="voutcher-name">∅ letzte 4 Stunden</span>
+                                </div>
+                                <div class="voutcher-right text-center border-left">
+                                    <h4 class="discount-percent">{{ wave['data']['water_level']['average'] }} cm</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- END WATER LEVEL -->
                     <hr></hr>
 
@@ -49,14 +67,22 @@
                             </svg>
                         </h5>
                     </div>
-                    <div class="int">
-                        <button type="button" class="btn btn-outline-light">
-                            {% if wave['data']['water_temp'] != 'None' %}
-                            {{ wave['data']['water_temp'] }} °C
-                            {% else %}
-                            Nicht verfügbar
-                            {% endif %}
-                        </button>
+                    <div class="mt-1">
+                        <div class="card voutchers" style="background: {{ wave['text_bg'] }}">
+                            <div class="voutcher-divider">
+                                <div class="voutcher-left text-center"> <span class="voutcher-name">Aktueller Wert</span>
+                                </div>
+                                <div class="voutcher-right text-center border-left">
+                                    <h5 class="discount-percent">
+                                        {% if wave['data']['water_temperature']['enabled'] %}
+                                            {{ wave['data']['water_temperature']['latest'][0]['value'] }} °C
+                                        {% else %}
+                                            <span class="voutcher-name">Nicht verfügbar</span>
+                                        {% endif %}
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!-- END WATER TEMPERATURE -->
                     <hr></hr>
@@ -70,40 +96,48 @@
                             </svg>
                         </h5>
                     </div>
-                    <div class="int">
-                        <button type="button" class="btn btn-outline-light">
-                            {% if wave['data']['water_runoff'] != 'None' %}
-                            {{ wave['data']['water_runoff'] }} m³/s
-                            {% else %}
-                            Nicht verfügbar
-                            {% endif %}
-                        </button>
+                    <div class="mt-1">
+                        <div class="card voutchers" style="background: {{ wave['text_bg'] }}">
+                            <div class="voutcher-divider">
+                                <div class="voutcher-left text-center"> <span class="voutcher-name">Aktueller Wert</span>
+                                    <h5 class="voutcher-code">
+                                        {% if wave['data']['water_runoff']['enabled'] %}
+                                            {{ wave['data']['water_runoff']['latest'][0]['datetime'] }}
+                                        {% endif %}
+                                    </h5>
+                                </div>
+                                <div class="voutcher-right text-center border-left">
+                                    <h5 class="discount-percent">
+                                        {% if wave['data']['water_runoff']['enabled'] %}
+                                            {{ wave['data']['water_runoff']['latest'][0]['value'] }} m³/s
+                                        {% else %}
+                                            <span class="voutcher-name">Nicht verfügbar</span>
+                                        {% endif %}
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <!-- END WATER TEMPERATURE -->
-                    <hr></hr>
 
-                    <!-- START LAST UPDATED -->
-                    <div style="padding: 5px;">
-                        <h5 class="data-header">Aktualisiert
-                            <svg class="data-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-                                 fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
-                                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
-                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
-                            </svg>
-                        </h5>
+                    <div class="mt-1">
+                        <div class="card voutchers" style="background: {{ wave['text_bg'] }}">
+                            <div class="voutcher-divider">
+                                <div class="voutcher-left text-center"> <span class="voutcher-name">∅ letzte 4 Stunden</span>
+                                </div>
+                                <div class="voutcher-right text-center border-left">
+                                    <h5 class="discount-percent">
+                                        {% if wave['data']['water_runoff']['enabled'] %}
+                                            {{ wave['data']['water_runoff']['average'] }} m³/s
+                                        {% else %}
+                                            <span class="voutcher-name">Nicht verfügbar</span>
+                                        {% endif %}
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="int">
-                        <button type="button" class="btn btn-outline-light">
-                            {% if wave['data']['datetime'] != 'None' %}
-                            {{ wave['data']['datetime'] }}
-                            {% else %}
-                            Nicht verfügbar
-                            {% endif %}
-                        </button>
-                    </div>
+                    <!-- END WATER RUNOFF -->
                 </div>
-                <!-- END LAST UPDATED -->
-
             </div>
         </div>
 

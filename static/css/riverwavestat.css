@@ -65,3 +65,86 @@ a.navbar-brand  {
 hr.footer-h-line {
 	border-top: 2px solid #8c8b8b;
 }
+
+
+
+.card {
+    border: none;
+    border-radius: 10px;
+    margin: 0 auto; /* Added */
+    float: none; /* Added */
+    margin-bottom: 10px; /* Added */
+    width: 250px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+}
+
+
+.voutchers {
+    border: solid;
+    border-width: 1px;
+    border-color: rgba(0,0,0, 0.2);
+    border-radius: 10px;
+    padding: 7px;
+    width: 250px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.voutcher-divider {
+    display: flex
+}
+
+.voutcher-left {
+    width: 50%;
+}
+
+.voutcher-name {
+    color: #fff;
+    font-size: 12px
+}
+
+.voutcher-code {
+    color: #fff;
+    font-size: 9px
+}
+
+.voutcher-right {
+    width: 50%;
+    color: #fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+
+/* No cookies website
+-------------------------------------------------- */
+.nocookie-container {
+  max-width: 30em
+}
+
+.nocookie-heading {
+  padding: 20px;
+}
+
+
+/* Imprint
+-------------------------------------------------- */
+.imprint-container {
+  max-width: 80em
+}
+
+.imprint-heading {
+  padding: 20px;
+}
+
+.encr {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+}
+
+
+
+
+
+
