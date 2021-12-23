@@ -18,7 +18,7 @@ scheduler.start()
 INTERVAL_TASK_ID = 'interval-task-id'
 
 # Thread-safe variable to store API response
-WAVE_DATA = multiprocessing.Value(ctypes.c_wchar_p, "")
+WAVE_DATA = multiprocessing.Value(ctypes.c_wchar_p, "{}")
 
 # Basic visual design data for each riverwave
 CONFIG = [
@@ -76,6 +76,10 @@ def not_found(e):
 @app.route("/")
 def home():
     """Home website with statistics of all waves"""
+
+    if json.loads(str(WAVE_DATA.value)) == {}:
+        return "Fetching API data..."
+
     return render_template("all_waves.html", config=json.loads(str(WAVE_DATA.value)))
 
 
