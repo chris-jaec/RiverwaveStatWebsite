@@ -1,9 +1,17 @@
 from flask import Flask, render_template, request, send_from_directory
-
+from flask_apscheduler import APScheduler
+import multiprocessing
+import random
 from api import api_wave_info
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
+scheduler = APScheduler()
+scheduler.init_app(app)
+scheduler.start()
+
+INTERVAL_TASK_ID = 'interval-task-id'
+simulated_room_temperature = multiprocessing.Value('d', 29)
 
 CONFIG = [
     {
@@ -33,6 +41,12 @@ CONFIG = [
 ]
 
 
+def interval_task():
+    simulated_room_temperature.value = random.uniform(19, 31)
+
+scheduler.add_job(id=INTERVAL_TASK_ID, func=interval_task, trigger='interval', seconds=5)
+
+
 def update_wave_data(config: list):
     updated_config = []
 
@@ -51,8 +65,9 @@ def not_found(e):
 
 @app.route("/")
 def home():
-    updated_config = update_wave_data(CONFIG)
-    return render_template("all_waves.html", config=updated_config)
+    #updated_config = update_wave_data(CONFIG)
+    #return render_template("all_waves.html", config=updated_config)
+    return 'Current temperature is ' + str(simulated_room_temperature.value), 200
 
 
 @app.route("/<wave_name>")
