@@ -40,10 +40,10 @@ sudo ln -sT /home/ubuntu/RiverwaveStatWebsite /var/www/html/riverwavestat
 echo "#######################################"  
 echo "######## CONFIG VENV + REQUIREMENTS"      
 echo "#######################################"
-sudo rm -rf /home/ubuntu/RiverwaveStatWebsite/riverwavestat
+sudo rm -rf /home/ubuntu/RiverwaveStatWebsite/venv-riverwavestat
 cd /home/ubuntu/RiverwaveStatWebsite            
-virtualenv riverwavestat                        
-source riverwavestat/bin/activate               
+virtualenv venv-riverwavestat
+source venv-riverwavestat/bin/activate
 pip install -r requirements.txt                 
 
 echo "#######################################" 
