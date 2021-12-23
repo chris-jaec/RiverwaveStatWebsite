@@ -2,7 +2,4 @@ __pycache__
 .idea/
 .vscode/
 **/.DS_Store
-*.sqlite
 venv-*
-riverwavestat
-http_cache.sqlite

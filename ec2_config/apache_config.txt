@@ -11,7 +11,7 @@
         ServerAdmin webmaster@localhost
         DocumentRoot /var/www/html
 
-        WSGIDaemonProcess riverwavestat threads=5
+        WSGIDaemonProcess riverwavestat threads=1
         WSGIScriptAlias / /var/www/html/riverwavestat/riverwavestat.wsgi
 
         <Directory riverwavestat>

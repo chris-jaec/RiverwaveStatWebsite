@@ -1,4 +1,3 @@
-Flask==2.0.1
+Flask==2.0.2
 requests==2.26.0
-requests-cache==0.8.1
-Flask-APScheduler
+Flask-APScheduler==1.12.3
