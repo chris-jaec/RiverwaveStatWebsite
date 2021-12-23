@@ -1,7 +1,7 @@
 import json
 import requests
 
-API_BASEURL = "https://xyz.execute-api.eu-central-1.amazonaws.com/dev"
+API_BASEURL = "https://238wsp254h.execute-api.eu-central-1.amazonaws.com/dev"
 
 def api_wave_info(wave: str):
 
