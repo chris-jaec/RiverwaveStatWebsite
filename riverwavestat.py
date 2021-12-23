@@ -48,6 +48,8 @@ CONFIG = [
     }
 ]
 
+
+@app.before_first_request
 def update_wave_data():
     """
     Gets wave data from the RiverwaveStat API and stores the data in the global thread-safe
@@ -121,5 +123,4 @@ def robots():
 
 
 if __name__ == "__main__":
-    update_wave_data()
     app.run()
