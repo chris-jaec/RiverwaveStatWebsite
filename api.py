@@ -1,12 +1,10 @@
 import json
-import os
 
 import requests
 
-API_ID = os.environ.get("API_ID")
-API_STAGE = os.environ.get("STAGE")
-API_REGION = os.environ.get("REGION")
-
+API_ID = "238wsp254h"
+API_STAGE = "dev"
+API_REGION = "eu-central-1"
 API_BASEURL = f"https://{API_ID}.execute-api.{API_REGION}.amazonaws.com/{API_STAGE}"
 
 

@@ -52,11 +52,4 @@ echo "#######################################"
 sudo rm -rf /etc/apache2/sites-enabled/000-default.conf   
 sudo cp /home/ubuntu/RiverwaveStatWebsite/ec2_config/apache_config.txt /etc/apache2/sites-enabled/000-default.conf
 
-echo "#######################################"
-echo "######## CONFIG ENV VARIABLES"
-echo "#######################################"
-sudo export API_ID="238wsp254h"
-sudo export STAGE="dev"
-sudo export REGION="eu-central-1"
-
 sudo apachectl restart
