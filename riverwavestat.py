@@ -28,12 +28,12 @@ CONFIG = [
         "gradient_to": "rgba(1, 69, 63, 0.7) 100%",
         "text_bg": "rgba(200, 200, 200, 0.2)"
     },
-    {
-        "name": "fuchslochwelle",
-        "gradient_from": "rgba(3, 67, 51, 0.7) 0%",
-        "gradient_to": "rgba(101, 0, 0, 0.7) 100%",
-        "text_bg": "rgba(200, 200, 200, 0.2)"
-    },
+#    {
+#        "name": "fuchslochwelle",
+#        "gradient_from": "rgba(3, 67, 51, 0.7) 0%",
+#        "gradient_to": "rgba(101, 0, 0, 0.7) 100%",
+#        "text_bg": "rgba(200, 200, 200, 0.2)"
+#    },
     {
         "name": "theriverwave",
         "gradient_from": "rgba(0, 70, 114, 0.7) 0%",
