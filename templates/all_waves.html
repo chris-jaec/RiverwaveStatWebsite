@@ -9,7 +9,7 @@
 
         <div id="single-wave-card-div" class="col-xxl-3 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="card-bg-cover"
-                 style="background-image: linear-gradient(to bottom,{{ wave['gradient_from'] }}, {{ wave['gradient_to'] }}), url(/static/img/{{ wave['name'] }}.jpg)">
+                 style="background-image: linear-gradient(to bottom,{{ wave['metadata']['website_style']['gradient_from'] }}, {{ wave['metadata']['website_style']['gradient_to'] }}), url(/static/img/{{ wave['name'] }}.jpg)">
 
                 <div class="data-container">
 
@@ -28,7 +28,7 @@
                     </div>
 
                     <div class="mt-1">
-                        <div class="card voutchers" style="background: {{ wave['text_bg'] }}">
+                        <div class="card voutchers" style="background: {{ wave['metadata']['website_style']['text_bg'] }}">
                             <div class="voutcher-divider">
                                 <div class="voutcher-left text-center">
                                     <h5 class="voutcher-name">Aktueller Wert</h5>
@@ -42,7 +42,7 @@
                     </div>
 
                     <div class="mt-1">
-                        <div class="card voutchers" style="background: {{ wave['text_bg'] }}">
+                        <div class="card voutchers" style="background: {{ wave['metadata']['website_style']['text_bg'] }}">
                             <div class="voutcher-divider">
                                 <div class="voutcher-left text-center">
                                     <span class="voutcher-name">∅ letzte 4 Stunden</span>
@@ -68,7 +68,7 @@
                         </h5>
                     </div>
                     <div class="mt-1">
-                        <div class="card voutchers" style="background: {{ wave['text_bg'] }}">
+                        <div class="card voutchers" style="background: {{ wave['metadata']['website_style']['text_bg'] }}">
                             <div class="voutcher-divider">
                                 <div class="voutcher-left text-center"> <span class="voutcher-name">Aktueller Wert</span>
                                 </div>
@@ -97,7 +97,7 @@
                         </h5>
                     </div>
                     <div class="mt-1">
-                        <div class="card voutchers" style="background: {{ wave['text_bg'] }}">
+                        <div class="card voutchers" style="background: {{ wave['metadata']['website_style']['text_bg'] }}">
                             <div class="voutcher-divider">
                                 <div class="voutcher-left text-center"> <span class="voutcher-name">Aktueller Wert</span>
                                     <h5 class="voutcher-code">
@@ -120,7 +120,7 @@
                     </div>
 
                     <div class="mt-1">
-                        <div class="card voutchers" style="background: {{ wave['text_bg'] }}">
+                        <div class="card voutchers" style="background: {{ wave['metadata']['website_style']['text_bg'] }}">
                             <div class="voutcher-divider">
                                 <div class="voutcher-left text-center"> <span class="voutcher-name">∅ letzte 4 Stunden</span>
                                 </div>

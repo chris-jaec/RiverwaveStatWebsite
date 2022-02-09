@@ -29,18 +29,13 @@
           <li class="nav-item">
             <a class="nav-link" href="/">Home</a>
           </li>
+            {% for wave in header %}
             <li class="nav-item">
-                <a class="nav-link" href="/eisbach">Eisbach</a>
+                <a class="nav-link"
+                   href="/{{ wave['name'] }}">{{ wave['displayName'] }}
+                </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/theriverwave">THE.RIVERWAVE</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/almkanal">Almkanal</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/fuchslochwelle">Nürnberger Dauerwelle</a>
-            </li>
+            {% endfor %}
         </ul>
       </div>
     </div>
@@ -72,7 +67,7 @@
           <p>
               RiverwaveStat zentralisiert alle öffentlich zugänglichen Flussdaten auf einer einzigen Website. Somit
               erhält man den aktuellen Wasserstand sowie weitere nützliche Informationen zu den bekannten Flusswellen in
-              Deutschland und Österreich auf einen Blick.
+              Deutschland, Österreich und der der Schweiz auf einen Blick.
           </p>
         </div>
         <!-- Grid column -->
@@ -87,14 +82,18 @@
             <a href="https://www.igsm.info/" class="text-reset">IGSM e.V.</a>
           </p>
           <p>
-            <a href="https://www.nuernberger-dauerwelle.de/" class="text-reset">Nürnberger Dauerwelle e.V.</a>
-          </p>
-          <p>
             <a href="https://www.theriverwave.com/" class="text-reset">THE.RIVERWAVE</a>
           </p>
           <p>
             <a href="https://www.rivermates.at/" class="text-reset">Rivermates Surfclub Salzkammergut</a>
           </p>
+            <p>
+            <a href="https://www.flusssurfen.ch/" class="text-reset">Verein Flusssurfen Thun</a>
+          </p>
+          <p>
+            <a href="https://waveriding.ch/" class="text-reset">Swiss Surfing Association</a>
+          </p>
+
         </div>
         <!-- Grid column -->
 
@@ -109,6 +108,9 @@
           </p>
           <p>
             <a href="https://hydro.ooe.gv.at/" class="text-reset">Hydrographischer Dienst Oberösterreich</a>
+          </p>
+          <p>
+            <a href="https://www.hydrodaten.admin.ch/" class="text-reset">Bundesamt für Umwelt BAFU</a>
           </p>
         </div>
         <!-- Grid column -->
