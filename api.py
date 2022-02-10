@@ -2,8 +2,8 @@ import json
 
 import requests
 
-API_ID = "3qkwfo3i7e"
-API_STAGE = "dev"
+API_ID = "xyz123"
+API_STAGE = "prod"
 API_REGION = "eu-central-1"
 API_BASEURL = f"https://{API_ID}.execute-api.{API_REGION}.amazonaws.com/{API_STAGE}"
 
