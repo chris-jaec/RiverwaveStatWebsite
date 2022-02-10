@@ -5,7 +5,7 @@ import multiprocessing
 from flask import Flask, render_template
 from flask_apscheduler import APScheduler
 
-from api import api_wave_info
+from api import api_wave_info, api_wave_overview
 
 app = Flask(__name__)
 
@@ -21,32 +21,15 @@ INTERVAL_TASK_ID = 'interval-task-id'
 WAVE_DATA = multiprocessing.Value(ctypes.c_wchar_p, "{}")
 
 # Basic visual design data for each riverwave
-CONFIG = [
-    {
-        "name": "eisbach",
-        "gradient_from": "rgba(8, 73, 125, 0.7) 0%",
-        "gradient_to": "rgba(1, 69, 63, 0.7) 100%",
-        "text_bg": "rgba(200, 200, 200, 0.2)"
-    },
-#    {
-#        "name": "fuchslochwelle",
-#        "gradient_from": "rgba(3, 67, 51, 0.7) 0%",
-#        "gradient_to": "rgba(101, 0, 0, 0.7) 100%",
-#        "text_bg": "rgba(200, 200, 200, 0.2)"
-#    },
-    {
-        "name": "theriverwave",
-        "gradient_from": "rgba(0, 70, 114, 0.7) 0%",
-        "gradient_to": "rgba(121, 44, 0, 0.7) 100%",
-        "text_bg": "rgba(200, 200, 200, 0.2)"
-    },
-    {
-        "name": "almkanal",
-        "gradient_from": "rgba(80, 80, 0, 0.7) 0%",
-        "gradient_to": "rgba(47, 0, 100, 0.7) 100%",
-        "text_bg": "rgba(200, 200, 200, 0.2)"
-    }
-]
+CONFIG = []
+HEADER_WAVES = []
+
+api_response = api_wave_overview()
+api_response = sorted(api_response, key=lambda x: int(x['metadata']['website_style']['position']))
+for wave in api_response:
+    if wave["enabled"]:
+        CONFIG.append({"name": wave["name"]})
+        HEADER_WAVES.append({"name": wave["name"], "displayName": wave["displayName"]})
 
 
 @app.before_first_request
@@ -82,7 +65,9 @@ def home():
     if json.loads(str(WAVE_DATA.value)) == {}:
         return "Fetching API data..."
 
-    return render_template("all_waves.html", config=json.loads(str(WAVE_DATA.value)))
+    print(WAVE_DATA.value)
+    print(HEADER_WAVES)
+    return render_template("all_waves.html", config=json.loads(str(WAVE_DATA.value)), header=HEADER_WAVES)
 
 
 @app.route("/<wave_name>")
@@ -93,7 +78,7 @@ def wave(wave_name):
 
     for riverwave in updated_config:
         if riverwave["name"] == wave_name:
-            return render_template("all_waves.html", config=[riverwave])
+            return render_template("all_waves.html", config=[riverwave], header=HEADER_WAVES)
 
     return render_template("404.html")
 
