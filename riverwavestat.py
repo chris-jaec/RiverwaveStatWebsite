@@ -28,7 +28,7 @@ api_response = api_wave_overview()
 api_response = sorted(api_response, key=lambda x: int(x['metadata']['website_style']['position']))
 for wave in api_response:
     if wave["enabled"]:
-        CONFIG.append({"name" : wave["name"]})
+        CONFIG.append({"name": wave["name"]})
         HEADER_WAVES.append({"name": wave["name"], "displayName": wave["displayName"]})
 
 

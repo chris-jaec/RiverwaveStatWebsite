@@ -18,6 +18,7 @@ def api_wave_info(wave: str):
 
     return json.loads(response.content)
 
+
 def api_wave_overview():
     url = f"{API_BASEURL}/riverwaves/"
     headers = {
