@@ -2,11 +2,10 @@ import json
 
 import requests
 
-API_ID = "xyz123"
+API_ID = "xyz"
 API_STAGE = "prod"
 API_REGION = "eu-central-1"
 API_BASEURL = f"https://{API_ID}.execute-api.{API_REGION}.amazonaws.com/{API_STAGE}"
-
 
 def api_wave_info(wave: str):
     url = f"{API_BASEURL}/riverwaves/{wave}"

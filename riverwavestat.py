@@ -39,17 +39,18 @@ def update_wave_data():
     WAVE_DATA variable.
     """
     updated_config = []
+    api_response = api_wave_info("all")
 
     for riverwave in CONFIG:
-        api_response = api_wave_info(riverwave["name"])
-        riverwave.update(api_response)
+
+        riverwave.update(api_response[riverwave["name"]])
         updated_config.append(riverwave)
 
     WAVE_DATA.value = json.dumps(updated_config)
 
 
 # Periodic update of the wave data from the API via a scheduler job
-scheduler.add_job(id=INTERVAL_TASK_ID, func=update_wave_data, trigger='interval', seconds=60)
+scheduler.add_job(id=INTERVAL_TASK_ID, func=update_wave_data, trigger='interval', seconds=120)
 
 
 @app.errorhandler(404)
@@ -65,8 +66,6 @@ def home():
     if json.loads(str(WAVE_DATA.value)) == {}:
         return "Fetching API data..."
 
-    print(WAVE_DATA.value)
-    print(HEADER_WAVES)
     return render_template("all_waves.html", config=json.loads(str(WAVE_DATA.value)), header=HEADER_WAVES)
 
 
