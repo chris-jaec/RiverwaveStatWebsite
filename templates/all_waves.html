@@ -7,9 +7,13 @@
 
         {% for wave in config %}
 
-        <div id="single-wave-card-div" class="col-xxl-3 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div id="single-wave-card-div"
+             class="col-xxl-4 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
             <div class="card-bg-cover"
-                 style="background-image: linear-gradient(to bottom,{{ wave['metadata']['website_style']['gradient_from'] }}, {{ wave['metadata']['website_style']['gradient_to'] }}), url(/static/img/{{ wave['name'] }}.jpg)">
+                 style="background-image: linear-gradient(to bottom,{{ wave['metadata'][
+                 'website_style']['gradient_from'] }}, {{ wave['metadata']['website_style'][
+                 'gradient_to'] }}), url(/static/img/{{ wave['name'] }}.jpg)">
 
                 <div class="data-container">
 
